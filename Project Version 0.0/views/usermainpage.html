@@ -43,7 +43,7 @@
                     <form>
                         <p class="lead">Εδω μπορεις να ανεβασεις τα har αρχεια σου!</p>
                         <input type="file" id="myFile" name="filename">
-                        <input type="submit">
+                        <button class="btn btn-dark" onclick="getLastUploadDate()">Submit</button>
                     </form>
                 </div>
                 <div class="col-7">
@@ -55,11 +55,26 @@
                     <a href="">Αλλαγή username</a>
                     <p class="lead" style="padding-top: 5px;  margin-bottom: 0%;">Password:</p><br>
                     <a href="">Αλλαγή password</a>
-                    <p class="lead" style="padding-top: 5px;">Last upload:</p>
+                    <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload:</p>
 
 
                 </div>
             </div>
+
+            <script>
+                function getLastUploadDate() {
+                    
+                    var paragraph = document.getElementById("lastupload");
+
+                   paragraph.textContent += document.lastModified
+                  
+                  
+                }
+                </script>
+
+
+
+
         </div>
     </div>
     <!--Main Layout-->
