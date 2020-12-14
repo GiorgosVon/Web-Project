@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"))
 }
 
-// Handlebars
+// EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs")
 
