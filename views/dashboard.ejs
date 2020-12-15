@@ -1,4 +1,55 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %>
-</p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<!--Navigation Bar-->
+<nav class="navbar navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/dashboard">Welcome <%= user.name%></a>
+    </div>
+</nav>
+<!--Navigation Bar-->
+
+<!--Main Layout-->
+<div id=mainpage>
+    <div class="container-fluid" style="padding-top: 65px;">
+        <div class="row">
+
+            <!--Left small collum-->
+            <div class="col">
+                <hr class="my-4"><br>
+                <p class="lead">Εδω μπορεις να ανεβασεις τα har αρχεια σου!</p>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="selectFiles" value="Import" class="custom-file-input" />
+                        <label for="selectFiles" class="custom-file-label">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button id="import" class="btn btn-outline-secondary" type="button">Import</button>
+                    </div>
+                </div>
+
+                <textarea id="result"></textarea>
+                <script src="/scripts/har-mani.js"></script>
+            </div>
+            <!--Left small collum-->
+
+            <!--Mid big collum-->
+            <div class="col-7">
+                <hr class="my-4">
+            </div>
+            <!--Mid big collum-->
+
+            <!--Right small collum-->
+            <div class="col">
+                <hr class="my-4">
+                <p class="lead" style="margin-bottom: 0%;">Username: <%= user.name%>
+                </p><br>
+                <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload: </p>
+                <a href="">Αλλαγή username</a>
+                <p class="lead" style="padding-top: 5px;  margin-bottom: 0%;"></p><br>
+                <a href="">Αλλαγή password</a>
+                <p></p>
+                <a href="/logout" class="btn btn-secondary">Logout</a>
+            </div>
+
+            <!--Right small collum-->
+        </div>
+    </div>
+</div>

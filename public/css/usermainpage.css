@@ -1,0 +1,29 @@
+html, body, #intro {
+    height: 100%;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #3c494d;
+    padding: 0.7rem ;
+}
+
+#mainpage {
+    background: url(/images/background-mainpage.jpg) no-repeat center center fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+}
+
+#result {
+    display:block;
+    width:400px;
+    height:200px;
+  }
+
+#logoutBtn {
+    display:block;
+    
+}

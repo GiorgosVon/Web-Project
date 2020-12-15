@@ -5,12 +5,6 @@ const bcrypt = require("bcryptjs")
 //User model 
 const User = require("../models/User")
 
-//desc:     Dashboard
-//route:    Get /dashboard
-router.get("/dashboard", (req, res) => {
-    res.render("dashboard")
-})
-
 //desc:     Register
 //route:    Get /register
 router.get("/register", (req, res) => {
@@ -47,10 +41,10 @@ router.post("/register", (req, res) => {
         })
     } else {
         // Validation passed
-        User.findOne({ email: email })
+        User.findOne({ name: name })
             .then(user => {
                 if (user) {
-                    errors.push({ msg: "Email is already in use" })
+                    errors.push({ msg: "Username is already in use" })
                     res.render("register", {
                         errors,
                         name,
@@ -74,6 +68,7 @@ router.post("/register", (req, res) => {
                             //save user
                             newUser.save()
                                 .then(user => {
+                                    req.flash("success_msg", "You are now registered and can log in")
                                     res.redirect("/");
                                 })
                                 .catch(err => console.log(err));
