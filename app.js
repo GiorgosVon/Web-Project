@@ -1,11 +1,13 @@
 const path = require("path")
 const express = require("express")
+const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
 const expressLayouts = require("express-ejs-layouts")
 const connectDB = require("./config/db")
 const flash = require("connect-flash")
 const session = require("express-session")
+const MongoStore = require("connect-mongo")(session)
 const passport = require("passport")
 
 //Load config
@@ -27,14 +29,16 @@ app.use(expressLayouts);
 app.set("view engine", "ejs")
 
 // Bodyparser
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, limit: "2500kb" }));
+app.use(express.json({ limit: "2500kb" }));
 
 // Express Session
 app.use(
     session({
         secret: "secret",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
     })
 );
 

@@ -24,9 +24,15 @@
                         <button id="import" class="btn btn-outline-secondary" type="button">Import</button>
                     </div>
                 </div>
-
-                <textarea id="result"></textarea>
-                <script src="/scripts/har-mani.js"></script>
+                <form method="POST" action="/dashboard" class="inline">
+                    <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                    <textarea id="result" name="result" class="mt-1"></textarea>
+                    <button type="submit" class="btn btn-secondary mt-1" name="submit_param" value="submit_value"
+                        class="upload-button">
+                        Upload
+                    </button>
+                </form>
+                <p><a href="" class="btn btn-secondary mt-1" id="dBtn">Download</a></p>
             </div>
             <!--Left small collum-->
 

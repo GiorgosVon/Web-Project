@@ -13,14 +13,24 @@ document.getElementById('import').onclick = function () {
             const content = []
             for (let i = 0; i < length; i++) {
                 for (heads of headers[i]) {
-                    //console.log(heads.name);
                     if (heads.name === valueName) {
-                        //console.log("mpika")
-                        content.push({
-                            id: i,
-                            [valueName]: heads.value
-                        })
-                        found = 1;
+
+                        // Modify date if needed
+                        if (valueName === "Last-Modified") {
+                            let date = heads.value
+                            content.push({
+                                id: i,
+                                [valueName]: new Date(date)
+                            })
+                            found = 1;
+
+                        } else {
+                            content.push({
+                                id: i,
+                                [valueName]: heads.value
+                            })
+                            found = 1;
+                        }
                     }
                 }
                 if (found !== 1) {
@@ -62,6 +72,22 @@ document.getElementById('import').onclick = function () {
             return new URL(url).hostname;
         }
 
+        // Get correct ip address
+        const getIpAddress = (ip) => {
+            if (ip[0] === "[") {
+                return ip.slice(1, -1)
+            } else {
+                return ip;
+            }
+        }
+
+        // Delete id if needed
+        const deleteId = (data) => {
+            for (let i = 0; i < data.length; i++) {
+                delete data[i].id;
+            }
+        }
+
 
         const methods = jsonContents.log.entries.map(entry => entry.request.method);
         const statuses = jsonContents.log.entries.map(entry => entry.response.status);
@@ -88,7 +114,7 @@ document.getElementById('import').onclick = function () {
         for (let i = 0; i < dates.length; i++) {
             data.push({
                 id: i,
-                ip: ip[i],
+                ip: getIpAddress(ip[i]),
                 url: getHostname(urls[i]), // Obtain domain names
                 timing: timing[i],
                 date: dates[i],
@@ -99,6 +125,10 @@ document.getElementById('import').onclick = function () {
         }
 
         let finalData = mergeArrayObjects(finalHeader, data);
+
+        // delete id if needed
+        deleteId(finalData);
+
         console.log(finalData);
 
         var formatted = JSON.stringify(finalData, null, 2);
@@ -115,3 +145,4 @@ $('#selectFiles').on('change', function () {
     //replace the "Choose a file" label
     $(this).next('.custom-file-label').html(fileName);
 })
+
