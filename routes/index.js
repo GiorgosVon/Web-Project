@@ -19,7 +19,9 @@ router.get("/dashboard", ensureAuthenticated, async (req, res) => {
         res.render("dashboard", {
             user: req.user,
             layout: "layoutUser",
-            userData
+            userData,
+            helper: require("../helpers/helper"),
+            title: "Express"
         })
     } catch (err) {
         console.error(err)

@@ -45,9 +45,10 @@
             <!--Right small collum-->
             <div class="col">
                 <hr class="my-4">
-                <p class="lead" style="margin-bottom: 0%;">Username: <%= user.name%>
-                </p><br>
-                <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload: </p>
+                <p class="lead" style="margin-bottom: 0%;">Username: <b><%= user.name%></b></p>
+                <br>
+                <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload: <%= helper.checkDate(userData) %>
+                </p>
                 <a href="">Αλλαγή username</a>
                 <p class="lead" style="padding-top: 5px;  margin-bottom: 0%;"></p><br>
                 <a href="">Αλλαγή password</a>
