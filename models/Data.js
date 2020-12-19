@@ -9,6 +9,9 @@ const DataSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    userIsp: {
+        type: String
+    },
     userJson: {
         "Host": {
             "type": "String"

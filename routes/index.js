@@ -2,6 +2,8 @@ const express = require("express")
 const passport = require("passport")
 const router = express.Router()
 const { ensureAuthenticated, ensureGuest } = require("../config/auth")
+const { getExternalIP } = require("../config/ipGet")
+const getUserIsp = require("../config/ispGet")
 
 const Data = require("../models/Data")
 
@@ -34,6 +36,10 @@ router.get("/dashboard", ensureAuthenticated, async (req, res) => {
 router.post("/dashboard", ensureAuthenticated, async (req, res) => {
     try {
         const { result } = req.body;
+        //get public userIp
+        const userAddress = await getExternalIP();
+        //get userIsp from publicIp
+        const userIsp = await getUserIsp(userAddress);
 
         //preparing json
         jsonString = result;
@@ -42,6 +48,7 @@ router.post("/dashboard", ensureAuthenticated, async (req, res) => {
         for (let i = 0; i < myJson.length; i++) {
             let entry = {
                 user: req.user.id,
+                userIsp: userIsp,
                 userJson: myJson[i]
             };
             docs.push(entry);
