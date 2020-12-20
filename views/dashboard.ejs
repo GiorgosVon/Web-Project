@@ -1,0 +1,62 @@
+<!--Navigation Bar-->
+<nav class="navbar navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/dashboard">Welcome <%= user.name%></a>
+    </div>
+</nav>
+<!--Navigation Bar-->
+
+<!--Main Layout-->
+<div id=mainpage>
+    <div class="container-fluid" style="padding-top: 65px;">
+        <div class="row">
+
+            <!--Left small collum-->
+            <div class="col">
+                <hr class="my-4"><br>
+                <p class="lead">Εδω μπορεις να ανεβασεις τα har αρχεια σου!</p>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="selectFiles" value="Import" class="custom-file-input" />
+                        <label for="selectFiles" class="custom-file-label">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button id="import" class="btn btn-outline-secondary" type="button">Import</button>
+                    </div>
+                </div>
+                <form method="POST" action="/dashboard" class="inline">
+                    <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                    <textarea id="result" name="result" class="mt-1"></textarea>
+                    <button type="submit" class="btn btn-secondary mt-1" name="submit_param" value="submit_value"
+                        class="upload-button">
+                        Upload
+                    </button>
+                </form>
+                <p><a href="" class="btn btn-secondary mt-1" id="dBtn">Download</a></p>
+            </div>
+            <!--Left small collum-->
+
+            <!--Mid big collum-->
+            <div class="col-7">
+                <hr class="my-4">
+            </div>
+            <!--Mid big collum-->
+
+            <!--Right small collum-->
+            <div class="col">
+                <hr class="my-4">
+                <p class="lead" style="margin-bottom: 0%;">Username: <b><%= user.name%></b></p>
+                <br>
+                <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload: <%= helper.checkDate(userData) %>
+                </p>
+                <a href="">Αλλαγή username</a>
+                <p class="lead" style="padding-top: 5px;  margin-bottom: 0%;"></p><br>
+                <a href="">Αλλαγή password</a>
+                <p></p>
+                <a href="/logout" class="btn btn-secondary">Logout</a>
+            </div>
+
+            <!--Right small collum-->
+        </div>
+    </div>
+</div>
