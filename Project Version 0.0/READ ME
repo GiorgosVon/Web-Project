@@ -1,4 +1,0 @@
-Apo to arxeio leipoyn simantika arxeia pou gia logous xorou den mporousa na ta anevaso sto github
-
-1. Arxeio package.json. Dimiourgite otan kanoume npm init.
-2. node_modules. Dimiourgite otan kanoume npm install express, mongo (kai oti allo kanoume install).
