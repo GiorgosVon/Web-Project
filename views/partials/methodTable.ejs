@@ -1,0 +1,16 @@
+<table class="table table-striped table-dark">
+    <thead> 
+        <tr>
+            <th scope="col">Method Type</th>
+            <th scope="col">Count</th>
+        </tr>
+    </thead>    
+    <tbody>
+        <% for(method in methodTypesCount[0]) {%>
+            <tr>
+                <td><%= method %></td>
+                <td><%= methodTypesCount[0][`${method}`]%></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

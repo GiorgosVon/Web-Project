@@ -27,3 +27,16 @@ html, body, #intro {
     display:block;
     
 }
+
+#userMap {
+    height: 500px;
+    width: 800px; 
+    margin-left: 15px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    border: 5px solid grey;
+}
+
+.show-onclick-user { display: none; }
+
+.show-onclick-pass { display: none; } 

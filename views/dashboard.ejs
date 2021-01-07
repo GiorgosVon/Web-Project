@@ -39,24 +39,59 @@
             <!--Mid big collum-->
             <div class="col-7">
                 <hr class="my-4">
+                <div id="userMap"></div>
             </div>
             <!--Mid big collum-->
 
             <!--Right small collum-->
             <div class="col">
                 <hr class="my-4">
-                <p class="lead" style="margin-bottom: 0%;">Username: <b><%= user.name%></b></p>
-                <br>
-                <p class="lead" id="lastupload" style="padding-top: 5px;">Last upload: <%= helper.checkDate(userData) %>
-                </p>
-                <a href="">Αλλαγή username</a>
-                <p class="lead" style="padding-top: 5px;  margin-bottom: 0%;"></p><br>
-                <a href="">Αλλαγή password</a>
+                <p class="lead" style="padding-bottom: 2px;">Username: <b>
+                        <%= user.name%>
+                    </b></p>
+                <p class="lead" id="entries" style="padding-top: 2px;">Number of Entries: <%= userData.length %></p>
+                <p class="lead" id="lastupload" style="padding-top: 2px;">Last upload: <%= helper.checkDate(userData) %></p>
+
+                <button id="nameChange" class="btn btn-secondary">Αλλαγή username</button>
+                <form method="POST" action="/update-name" class="show-onclick-user form-group">
+                    <div class="form-group">
+                        <label for="name">Βάλε ένα νέο όνομα χρήστη:</label>
+                        <input type="name" class="form-control" id="name" name="name" placeholder="Νέο username">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Αλλαξέ το!</button>
+                </form>
+                <p class="lead" style="padding-top: 2px;  margin-bottom: 0%;"></p><br>
+
+                <button id="passChange" class="btn btn-secondary">Αλλαγή password</button>
+                <form method="POST" action="/update-pass" class="show-onclick-pass form-group">
+                    <div class="form-group">
+                        <label for="pass">Βάλε ένα νέο password:</label>
+                        <input type="password" class="form-control" id="pass" name="pass" placeholder="Νέο password">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass2">Επαλήθευσε password:</label>
+                        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Νέο password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Αλλαξέ το!</button>
+                </form>
                 <p></p>
+                
                 <a href="/logout" class="btn btn-secondary">Logout</a>
             </div>
 
             <!--Right small collum-->
         </div>
     </div>
+
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#nameChange').click(function () {
+            $('.show-onclick-user').toggle();
+        });
+        $('#passChange').click(function () {
+            $('.show-onclick-pass').toggle();
+        });
+    });
+</script>

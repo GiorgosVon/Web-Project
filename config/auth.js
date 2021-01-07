@@ -12,6 +12,18 @@ module.exports = {
         } else {
             return next();
         }
+    },
+    ensureAdmin: function (req, res, next) {
+        if (req.user.name === 'admin') {
+            return next();
+        } else {
+            req.flash('danger', 'Please Login as admin');
+            res.redirect('/');
+        }
     }
+
+
+
+
 }
 

@@ -1,0 +1,20 @@
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">isp Type</th>
+            <th scope="col">Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(isp in ispTypesCount[0]) {%>
+            <tr>
+                <td>
+                    <%= isp %>
+                </td>
+                <td>
+                    <%= ispTypesCount[0][`${isp}`]%>
+                </td>
+            </tr>
+            <% } %>
+    </tbody>
+</table>

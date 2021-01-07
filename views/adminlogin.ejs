@@ -1,0 +1,56 @@
+<!--Navigation Bar-->
+<nav class="navbar navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Our project</a>
+    </div>
+</nav>
+<!--Navigation Bar-->
+
+
+<!--Main Layout-->
+<div id="home">
+    <div class="welcome-text">
+        <h3 class="font-weght-light">Welcome Admin!</h3>
+        <%- include("partials/messages.ejs") %>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr class="my-4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4">
+                        <h4 class="lead" style="margin-bottom: 1em">Log In as Admin</h4>
+                        <form action="/adminlogin" method="POST">
+                            <div class="form-group">
+                                <label for="name">Username</label>
+                                <input type="name" id="name" name="name" class="form-control"
+                                    placeholder="Enter Username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Enter Password" />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                        <p class="lead mt-4">
+                            No Account? <a href="/users/register">Register</a> <br>
+                            Not an Admin? <a href="/">Log in As User</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!--Main Layout-->
+
+<!--Footer-->
+<footer>
+
+</footer>
+<!--Footer-->

@@ -1,0 +1,16 @@
+<table class="table table-striped table-dark">
+    <thead> 
+        <tr>
+            <th scope="col">Status Type</th>
+            <th scope="col">Count</th>
+        </tr>
+    </thead>    
+    <tbody>
+        <% for(status in statusTypesCount[0]) {%>
+            <tr>
+                <td><%= status %></td>
+                <td><%= statusTypesCount[0][`${status}`]%></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

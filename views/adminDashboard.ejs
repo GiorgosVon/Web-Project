@@ -1,0 +1,139 @@
+<!--Navigation Bar-->
+<nav class="navbar navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/adminDashboard">Welcome <%= user.name%></a>
+    </div>
+</nav>
+<!--Navigation Bar-->
+
+<!--Main Layout-->
+<div id="mainpage">
+    <div class="container-fluid" style="padding-top: 65px;">
+        <div class="row">
+
+            <!--Left collum-->
+            <div class="col">
+                <hr class="my-4"><br>
+                <!--Collapse drop down  fields-->
+                <div class="accordion groupOfTables" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Show number of Users
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="lead">The number of registered users is: <%= numOfUsers%>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Show number of documents for each type of Method
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <%- include("partials/methodTable.ejs") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Show number of documents for each type of status
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <%- include("partials/statusTable.ejs") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Show number of documents for each type of Domain
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <%- include("partials/domainTable.ejs") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Show number of documents for each type of Unique isp
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <%- include("partials/ispTable.ejs") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
+                <!--Collapse drop down  fields-->
+                <div class="accordion groupOfTables" id="accordion2">
+                    <div class="card">
+                        <div class="card-header" id="heading1">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                    Choose Content Type
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion2">
+                            <div class="card-body">
+                                <%- include("partials/contentType.ejs") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Collapse drop down  fields-->
+            </div>
+            <!--Left collum-->
+
+
+            <!--Right collum-->
+            <div class="col">
+                <hr class="my-4"><br>
+                <canvas id="myChart"></canvas>
+                <p></p>
+                <canvas id="myChart2"></canvas>
+                <input  type="hidden" id="contentTypeData" value="<%= resultContent%>"/>
+            </div>
+            <!--Right collum-->
+        </div>
+    </div>
+</div>

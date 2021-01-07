@@ -1,0 +1,5 @@
+<select class="custom-select" id="typeSelector" multiple>
+    <% for(let i=0; i<distinctContentType.length; i++) {%>
+         <option id="<%= i %>" value="<%= distinctContentType[i] %>"><%= distinctContentType[i]%></option>
+    <% } %>
+</select>
