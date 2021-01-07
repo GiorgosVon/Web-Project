@@ -310,5 +310,11 @@ router.get("/logout", (req, res) => {
     res.redirect("/");
 })
 
+// Logout Admin
+router.get('/logoutAdmin', function (req, res) {
+    req.session.destroy(function (err) {
+        res.redirect('/');
+    });
+});
 
 module.exports = router
