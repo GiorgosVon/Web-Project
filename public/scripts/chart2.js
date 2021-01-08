@@ -2,8 +2,8 @@ var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart2 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-            "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+        labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+            "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
         datasets: [{
             label: '',
             data: [],
@@ -49,7 +49,7 @@ $('#typeSelector').on('change', function () {
     if (values.length === 1) {
         for (content of contentTypeData) {
             if (content.type == values[0]) {
-                for (let i = 1; i <= 24; i++) {
+                for (let i = 0; i <= 23; i++) {
                     if (content.avg.hasOwnProperty(i)) {
                         myChart2.data.datasets[0].data.push(content.avg[`${i}`].average);
                     } else {
@@ -88,7 +88,7 @@ $('#typeSelector').on('change', function () {
         }
 
         // use temp object to create graph
-        for (let i = 1; i <= 24; i++) {
+        for (let i = 0; i <= 23; i++) {
             if (obj.hasOwnProperty(i)) {
                 myChart2.data.datasets[0].data.push(obj[`${i}`].average);
             } else {
@@ -138,7 +138,7 @@ $('#daySelector').on('change', function () {
     if (values.length === 1) {
         for (content of uniqueObj) {
             if (content.day == values[0]) {
-                for (let i = 1; i <= 24; i++) {
+                for (let i = 0; i <= 23; i++) {
                     if (content.avg.hasOwnProperty(i)) {
                         myChart2.data.datasets[0].data.push(content.avg[`${i}`].average);
                     } else {
@@ -177,7 +177,7 @@ $('#daySelector').on('change', function () {
         console.log(obj);
 
         // use temp object to create graph
-        for (let i = 1; i <= 24; i++) {
+        for (let i = 0; i <= 23; i++) {
             if (obj.hasOwnProperty(i)) {
                 myChart2.data.datasets[0].data.push(obj[`${i}`].average);
             } else {

@@ -331,16 +331,16 @@ router.post("/update-pass", async (req, res) => {
     }
 })
 
-
-// Logout
-router.get("/logout", (req, res) => {
+router.get('/logout', function (req, res) {
     req.logout();
-    req.flash("success_msg", "You are logged out");
-    res.redirect("/");
-})
+    req.session.destroy(function (err) {
+        res.redirect('/');
+    });
+});
 
 // Logout Admin
 router.get('/logoutAdmin', function (req, res) {
+    req.logout();
     req.session.destroy(function (err) {
         res.redirect('/');
     });
