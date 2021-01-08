@@ -36,6 +36,7 @@ var myChart2 = new Chart(ctx, {
 });
 
 var contentTypeData = JSON.parse(document.getElementById("contentTypeData").value);
+console.log(contentTypeData);
 
 $('#typeSelector').on('change', function () {
     myChart2.data.datasets[0].label = "Content Type"
@@ -99,4 +100,94 @@ $('#typeSelector').on('change', function () {
         }
         myChart2.update();
     }
+});
+
+let dayData = JSON.parse(document.getElementById("dayData").value);
+dayData = dayData[0];
+
+tempData = dayData;
+tempData = Object.keys(tempData).map(i => tempData[i]);
+const unique = [...new Set(tempData.map(item => item.day))];
+const uniqueObj = []
+for (let i = 0; i < unique.length; i++) {
+    uniqueObj.push({
+        day: unique[i],
+        avg: {}
+    })
+}
+for (hour in dayData) {
+    for (u of uniqueObj) {
+        if (dayData[hour].day == u.day) {
+            let temp = {
+                [hour]: dayData[hour].avg
+            }
+            u.avg[[hour]] = dayData[hour].avg
+        }
+    }
+}
+console.log(uniqueObj);
+
+
+$('#daySelector').on('change', function () {
+    myChart2.data.datasets[0].label = "Day"
+    myChart2.data.datasets[0].data = [];
+    myChart2.data.datasets[0].backgroundColor = [];
+    myChart2.data.datasets[0].borderColor = [];
+    var values = $(this).val();
+
+    if (values.length === 1) {
+        for (content of uniqueObj) {
+            if (content.day == values[0]) {
+                for (let i = 1; i <= 24; i++) {
+                    if (content.avg.hasOwnProperty(i)) {
+                        myChart2.data.datasets[0].data.push(content.avg[`${i}`].average);
+                    } else {
+                        myChart2.data.datasets[0].data.push(0);
+                    }
+                    var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+                    myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+                    myChart2.data.datasets[0].borderColor.push(color + "1)");
+                }
+            }
+        }
+        myChart2.update();
+    } else if (values.length > 1) {
+        let obj = {};
+        // create temp obj
+        // for each user input iterate over objects
+        // do weighted average calculation
+        for (value of values) {
+            for (content of uniqueObj) {
+                if (content.day == value) {
+                    let avgObj = content.avg;
+                    for (key in avgObj) {
+                        if (!(key in obj)) {
+                            obj[`${key}`] = avgObj[key]
+                        } else if (key in obj) {
+                            let tempAvg = ((obj[key].average * obj[key].count) + (avgObj[key].average * avgObj[key].count)) / (obj[key].count + avgObj[key].count);
+                            let tempCount = obj[key].count + avgObj[key].count
+
+                            obj[key].average = tempAvg;
+                            obj[key].count = tempCount;
+                        }
+                    }
+                }
+            }
+        }
+        console.log(obj);
+
+        // use temp object to create graph
+        for (let i = 1; i <= 24; i++) {
+            if (obj.hasOwnProperty(i)) {
+                myChart2.data.datasets[0].data.push(obj[`${i}`].average);
+            } else {
+                myChart2.data.datasets[0].data.push(0);
+            }
+            var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+            myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+            myChart2.data.datasets[0].borderColor.push(color + "1)");
+        }
+        myChart2.update();
+    }
+
 });

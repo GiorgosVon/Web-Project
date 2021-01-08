@@ -148,20 +148,49 @@ router.get("/adminDashboard", ensureAdmin, ensureAuthenticated, async (req, res)
         const avgPerContentTypeArr = await agg(distinctContentType);
         // --
 
+        // -- Aggregation for Day
+        const avgPerDay = await Data.aggregate([
+            {
+                "$group": {
+                    "_id": {
+                        "day": { "$dayOfWeek": "$userJson.date" },
+                        "hour": { "$hour": "$userJson.date" }
+                    },
+                    "count": { "$sum": 1 },
+                    "perHour": { "$avg": "$userJson.timing" }
+                }
+            },
+            {
+                "$group": {
+                    "_id": null,
+                    "counts": {
+                        "$push": { "k": { "$toString": "$_id.hour" }, "v": { "day": "$_id.day", "avg": { "average": "$perHour", "count": "$count" } } }
+                    }
+                }
+            },
+            {
+                "$replaceRoot": {
+                    "newRoot": { "$arrayToObject": "$counts" }
+                }
+            }
+        ])
+        // --
+
         const numOfUsers = await User.countDocuments();
-        const userData = await Data.find({ user: req.user.id }).lean()
+        //const userData = await Data.find({ user: req.user.id }).lean()
         res.render("adminDashboard", {
             user: req.user,
             layout: "layoutAdmin",
-            userData,
+            //userData,
             numOfUsers,
             methodTypesCount,
             statusTypesCount,
             domainTypesCount,
             ispTypesCount,
             distinctContentType,
-            avgPerContentTypeArr,
+            //avgPerContentTypeArr,
             resultContent: JSON.stringify(avgPerContentTypeArr),
+            resultDay: JSON.stringify(avgPerDay),
             helper: require("../helpers/helper"),
             title: "Express"
         })
