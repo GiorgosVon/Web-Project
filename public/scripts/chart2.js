@@ -36,7 +36,6 @@ var myChart2 = new Chart(ctx, {
 });
 
 var contentTypeData = JSON.parse(document.getElementById("contentTypeData").value);
-console.log(contentTypeData);
 
 $('#typeSelector').on('change', function () {
     myChart2.data.datasets[0].label = "Content Type"
@@ -125,7 +124,6 @@ for (hour in dayData) {
         }
     }
 }
-console.log(uniqueObj);
 
 
 $('#daySelector').on('change', function () {
@@ -174,7 +172,6 @@ $('#daySelector').on('change', function () {
                 }
             }
         }
-        console.log(obj);
 
         // use temp object to create graph
         for (let i = 0; i <= 23; i++) {
@@ -191,3 +188,137 @@ $('#daySelector').on('change', function () {
     }
 
 });
+
+var methodData = JSON.parse(document.getElementById("methodData").value);
+
+$('#methodSelector').on('change', function () {
+    myChart2.data.datasets[0].label = "Method"
+    myChart2.data.datasets[0].data = [];
+    myChart2.data.datasets[0].backgroundColor = [];
+    myChart2.data.datasets[0].borderColor = [];
+    var values = $(this).val();
+
+    // if user selected 1 choice
+    if (values.length === 1) {
+        for (content of methodData) {
+            if (content.type == values[0]) {
+                for (let i = 0; i <= 23; i++) {
+                    if (content.avg.hasOwnProperty(i)) {
+                        myChart2.data.datasets[0].data.push(content.avg[`${i}`].average);
+                    } else {
+                        myChart2.data.datasets[0].data.push(0);
+                    }
+                    var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+                    myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+                    myChart2.data.datasets[0].borderColor.push(color + "1)");
+                }
+            }
+        }
+        myChart2.update();
+
+    } else if (values.length > 1) {
+        let obj = {};
+        // create temp obj
+        // for each user input iterate over objects
+        // do weighted average calculation
+        for (value of values) {
+            for (content of methodData) {
+                if (content.type === value) {
+                    let avgObj = content.avg;
+                    for (key in avgObj) {
+                        if (!(key in obj)) {
+                            obj[`${key}`] = avgObj[key]
+                        } else if (key in obj) {
+                            let tempAvg = ((obj[key].average * obj[key].count) + (avgObj[key].average * avgObj[key].count)) / (obj[key].count + avgObj[key].count);
+                            let tempCount = obj[key].count + avgObj[key].count
+
+                            obj[key].average = tempAvg;
+                            obj[key].count = tempCount;
+                        }
+                    }
+                }
+            }
+        }
+
+        // use temp object to create graph
+        for (let i = 0; i <= 23; i++) {
+            if (obj.hasOwnProperty(i)) {
+                myChart2.data.datasets[0].data.push(obj[`${i}`].average);
+            } else {
+                myChart2.data.datasets[0].data.push(0);
+            }
+            var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+            myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+            myChart2.data.datasets[0].borderColor.push(color + "1)");
+        }
+        myChart2.update();
+    }
+});
+
+var ispData = JSON.parse(document.getElementById("ispData").value);
+
+$('#ispSelector').on('change', function () {
+    myChart2.data.datasets[0].label = "Isp"
+    myChart2.data.datasets[0].data = [];
+    myChart2.data.datasets[0].backgroundColor = [];
+    myChart2.data.datasets[0].borderColor = [];
+    var values = $(this).val();
+
+    // if user selected 1 choice
+    if (values.length === 1) {
+        for (content of ispData) {
+            if (content.type == values[0]) {
+                for (let i = 0; i <= 23; i++) {
+                    if (content.avg.hasOwnProperty(i)) {
+                        myChart2.data.datasets[0].data.push(content.avg[`${i}`].average);
+                    } else {
+                        myChart2.data.datasets[0].data.push(0);
+                    }
+                    var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+                    myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+                    myChart2.data.datasets[0].borderColor.push(color + "1)");
+                }
+            }
+        }
+        myChart2.update();
+
+    } else if (values.length > 1) {
+        let obj = {};
+        // create temp obj
+        // for each user input iterate over objects
+        // do weighted average calculation
+        for (value of values) {
+            for (content of ispData) {
+                if (content.type === value) {
+                    let avgObj = content.avg;
+                    for (key in avgObj) {
+                        if (!(key in obj)) {
+                            obj[`${key}`] = avgObj[key]
+                        } else if (key in obj) {
+                            let tempAvg = ((obj[key].average * obj[key].count) + (avgObj[key].average * avgObj[key].count)) / (obj[key].count + avgObj[key].count);
+                            let tempCount = obj[key].count + avgObj[key].count
+
+                            obj[key].average = tempAvg;
+                            obj[key].count = tempCount;
+                        }
+                    }
+                }
+            }
+        }
+
+        // use temp object to create graph
+        for (let i = 0; i <= 23; i++) {
+            if (obj.hasOwnProperty(i)) {
+                myChart2.data.datasets[0].data.push(obj[`${i}`].average);
+            } else {
+                myChart2.data.datasets[0].data.push(0);
+            }
+            var color = "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ",";
+            myChart2.data.datasets[0].backgroundColor.push(color + "0.3)");
+            myChart2.data.datasets[0].borderColor.push(color + "1)");
+        }
+        myChart2.update();
+    }
+});
+
+

@@ -8,6 +8,8 @@ const getHeapMapData = require("../config/getHeatMapData")
 const cleanupHeatData = require("../config/cleanupHeat")
 const bcrypt = require("bcryptjs")
 const agg = require("../config/agg")
+const aggMethod = require("../config/aggMethod")
+const aggIsp = require("../config/aggIsp")
 
 
 const Data = require("../models/Data")
@@ -176,6 +178,16 @@ router.get("/adminDashboard", ensureAdmin, ensureAuthenticated, async (req, res)
         ])
         // --
 
+        // -- Aggregation for method
+        let distinctMethod = await Data.distinct("userJson.method").lean()
+        const avgPerMethodArr = await aggMethod(distinctMethod);
+        // -- 
+
+        // -- Aggregation for isp
+        let distinctIsp = await Data.distinct("userIsp").lean()
+        const avgPerIspArr = await aggIsp(distinctIsp);
+        // --
+
         const numOfUsers = await User.countDocuments();
         //const userData = await Data.find({ user: req.user.id }).lean()
         res.render("adminDashboard", {
@@ -188,9 +200,13 @@ router.get("/adminDashboard", ensureAdmin, ensureAuthenticated, async (req, res)
             domainTypesCount,
             ispTypesCount,
             distinctContentType,
+            distinctMethod,
+            distinctIsp,
             //avgPerContentTypeArr,
             resultContent: JSON.stringify(avgPerContentTypeArr),
             resultDay: JSON.stringify(avgPerDay),
+            resultMethod: JSON.stringify(avgPerMethodArr),
+            resultIsp: JSON.stringify(avgPerIspArr),
             helper: require("../helpers/helper"),
             title: "Express"
         })

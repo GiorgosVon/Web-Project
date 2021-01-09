@@ -1,0 +1,5 @@
+<select class="custom-select" id="methodSelector" multiple>
+    <% for(let i=0; i<distinctMethod.length; i++) {%>
+         <option id="<%= i %>" value="<%= distinctMethod[i] %>"><%= distinctMethod[i]%></option>
+    <% } %>
+</select>
