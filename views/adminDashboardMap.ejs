@@ -1,0 +1,31 @@
+<!--Navigation Bar-->
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="/adminDashboard">Welcome <%= user.name%></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/adminDashboard">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/adminDashboardMap">Map</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/logoutAdmin">Logout</a>
+            </li>
+        </ul>  
+    </div>
+</nav>
+<!--Navigation Bar-->
+
+<!--Main Layout-->
+<div id="mainpage">
+    <div class="container-fluid" style="padding-top: 65px;">        
+        <div id="adminMap"></div>
+    </div>
+
+    <input type="hidden" id="userLatLong" value="<%= userLatLong%>"/>
+    <input type="hidden" id="ipLatLong" value="<%= ipLatLong%>"/>
+</div>

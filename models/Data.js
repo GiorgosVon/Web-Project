@@ -12,6 +12,9 @@ const DataSchema = new mongoose.Schema({
     userIsp: {
         type: String
     },
+    userIp: {
+        type: String
+    },
     userJson: {
         "Host": {
             "type": "String"

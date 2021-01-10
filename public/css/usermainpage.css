@@ -37,6 +37,15 @@ html, body, #intro {
     border: 5px solid grey;
 }
 
+#adminMap{
+        height: 700px;
+        width: 1200px; 
+        margin-left: 15px;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        border: 5px solid grey;
+}
+
 .show-onclick-user { display: none; }
 
 .show-onclick-pass { display: none; } 
