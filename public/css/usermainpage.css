@@ -29,9 +29,10 @@ html, body, #intro {
 }
 
 #userMap {
-    height: 500px;
-    width: 800px; 
-    margin-left: 15px;
+    height: 700px;
+    width: 1000px; 
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     margin-bottom: 50px;
     border: 5px solid grey;
@@ -40,7 +41,8 @@ html, body, #intro {
 #adminMap{
         height: 700px;
         width: 1200px; 
-        margin-left: 15px;
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 20px;
         margin-bottom: 50px;
         border: 5px solid grey;
